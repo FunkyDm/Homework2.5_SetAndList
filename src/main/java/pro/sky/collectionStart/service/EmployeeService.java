@@ -5,6 +5,7 @@ import pro.sky.collectionStart.employeesService.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EmployeeService {
@@ -12,17 +13,29 @@ public class EmployeeService {
 
     private final List<Employee> employees = new ArrayList<>(MAX_NUM_EMPLOYEES);
 
-    public void addEmployee(String firstName, String lastName){
-        for(int i = 0; i < employees.size(); i++){
-            if(employees.get(i) == null){
-                employees.add(new Employee(firstName, lastName));
+    public Employee addEmployee(String firstName, String lastName){
+        Employee employee = new Employee(firstName, lastName);
+        employees.add(employee);
+        return employee;
+    }
+
+    public Employee removeEmployee(String firstName, String lastName){
+        for(Employee employee : employees){
+            if(Objects.equals(employee.getFirstName(), firstName) && Objects.equals(employee.getLastName(), lastName)){
+                employees.remove(employee);
+                return employee;
             }
         }
+        throw new RuntimeException();
+    }
+
+    public Employee findEmployee(String firstName, String lastName){
+        for(Employee employee : employees){
+            if(Objects.equals(employee.getFirstName(), firstName) && Objects.equals(employee.getLastName(), lastName)){
+                System.out.println(employee);
+                return employee;
+            }
+        }
+        throw new RuntimeException();
     }
 }
-
-//Реализовать в сервисе три метода, которые принимают в качестве параметров firstName
-// и lastName:
-//        1. Добавить сотрудника.
-//        2. Удалить сотрудника.
-//        3. Найти сотрудника.
