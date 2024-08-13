@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import pro.sky.collectionStart.employeesService.Employee;
+import pro.sky.collectionStart.model.Employee;
 import pro.sky.collectionStart.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.collectionStart.exceptions.EmployeeNotFoundExceptions;
 import pro.sky.collectionStart.exceptions.EmployeesStorageFullException;
@@ -15,7 +15,7 @@ import pro.sky.collectionStart.service.EmployeeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employee/")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -56,20 +56,9 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/print")
-    public List<Employee> printAllEmployees(){
+    @GetMapping
+    public List<Employee> printAllEmployees() {
         return employeeService.printAllEmployees();
     }
 
 }
-//Объявить в контроллере 3 метода:
-//        1. По адресу /employee/add?firstName=Ivan&lastName=Ivanov должен вернуться объект
-//        Employee в формате JSON, т.е. { "firstName": "Ivan", "lastName": "Ivanov" },
-//        или исключение ArrayIsFull в случае переполнения коллекции или EmployeeAlreadyAdded в
-//        случае, когда сотрудник уже существует.
-//        2. По адресу /employee/remove?firstName=Ivan&lastName=Ivanov должен вернуться объект
-//        Employee в формате JSON, т.е. { "firstName": "Ivan", "lastName": "Ivanov" }, или
-//        исключение со статусом EmployeeNotFound, если сотрудник отсутствует.
-//3. По адресу /employee/find?firstName=Ivan&lastName=Ivanov должен вернуться объект Employee
-// в формате JSON, т.е. { "firstName": "Ivan", "lastName": "Ivanov" }, или исключение
-// со статусом EmployeeNotFound, если такой сотрудник отсутствует.

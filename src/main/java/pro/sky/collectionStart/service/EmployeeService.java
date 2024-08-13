@@ -1,12 +1,13 @@
 package pro.sky.collectionStart.service;
 
 import org.springframework.stereotype.Service;
-import pro.sky.collectionStart.employeesService.Employee;
+import pro.sky.collectionStart.model.Employee;
 import pro.sky.collectionStart.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.collectionStart.exceptions.EmployeeNotFoundExceptions;
 import pro.sky.collectionStart.exceptions.EmployeesStorageFullException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,8 +49,8 @@ public class EmployeeService {
         throw new EmployeeNotFoundExceptions("Такого сотрудника не существует.");
     }
 
-    public List<Employee> printAllEmployees(){
-        return employees;
+    public List<Employee> printAllEmployees() {
+        return Collections.unmodifiableList(employees);
     }
 
 }

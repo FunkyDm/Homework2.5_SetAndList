@@ -1,6 +1,4 @@
-package pro.sky.collectionStart.employeesService;
-
-import java.util.Objects;
+package pro.sky.collectionStart.model;
 
 public class Employee {
     private final String firstName;
